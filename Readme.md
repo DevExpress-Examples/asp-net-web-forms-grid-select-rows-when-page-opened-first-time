@@ -7,7 +7,7 @@
 <!-- run online -->
 **[[Run Online]](https://codecentral.devexpress.com/e20039/)**
 <!-- run online end -->
-This example demonstares how to specify a list of rows to select in Controller, pass this data to View, and select the specified rows when a page is opened for the first time.
+This example demonstares how to specify a list of rows in Controller, pass this data to View, and select the specified rows when a page is opened for the first time.
 
 ![](grid-with-selected-rows.png)
 
