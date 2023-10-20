@@ -1,0 +1,30 @@
+@model System.Collections.IEnumerable
+
+@{		 
+	var grid = Html.DevExpress().GridView(
+			settings => {
+				settings.Name = "gvEditing";
+				settings.KeyFieldName = "ProductID";
+				settings.CallbackRouteValues = new { Controller = "Home", Action = "InlineEditingPartial" };
+				settings.CommandColumn.ShowSelectCheckbox = true;
+				settings.CommandColumn.Visible = true;
+				
+				settings.Columns.Add("ProductID");
+				settings.Columns.Add("ProductName");
+
+				settings.Columns.Add("QuantityPerUnit");
+				
+
+				settings.PreRender = (sender, e) => {
+					MVCxGridView gridView = sender as MVCxGridView;
+					if ((gridView != null) && (ViewData["selectedRows"] != null)) {
+						int[] selectedRows = (int[])ViewData["selectedRows"];
+						foreach (int key in selectedRows){
+							gridView.Selection.SelectRowByKey(key);
+						}
+					}
+					
+				};    
+			});
+}
+@grid.Bind(Model).GetHtml()
