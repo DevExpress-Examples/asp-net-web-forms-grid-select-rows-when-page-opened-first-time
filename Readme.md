@@ -1,4 +1,5 @@
 <!-- default badges list -->
+![](https://img.shields.io/endpoint?url=https://codecentral.devexpress.com/api/v1/VersionRange/128550511/14.1.3%2B)
 [![](https://img.shields.io/badge/Open_in_DevExpress_Support_Center-FF7200?style=flat-square&logo=DevExpress&logoColor=white)](https://supportcenter.devexpress.com/ticket/details/E20039)
 [![](https://img.shields.io/badge/📖_How_to_use_DevExpress_Examples-e9f6fc?style=flat-square)](https://docs.devexpress.com/GeneralInformation/403183)
 <!-- default badges end -->
@@ -7,11 +8,11 @@
 <!-- run online -->
 **[[Run Online]](https://codecentral.devexpress.com/e20039/)**
 <!-- run online end -->
-This example demonstares how to specify a list of row to select in controller, pass this data to view, and select the specified rows.
+This example demonstares how to specify a list of rows to select in Controller, pass this data to View, and select the specified rows when a page is opened for the first time.
 
 ![](grid-with-selected-rows.png)
 
-We use the `ViewBag` dictionary to transfer keys of selected rows from Controller to View.
+We use the `ViewBag` dictionary to transfer row keys from Controller to View.
 
 **HomeController.cs**
 ```
@@ -31,6 +32,7 @@ settings.PreRender = (sender, e) => {
         }
     }
 };
+```
 
 ## Files to Review
 
