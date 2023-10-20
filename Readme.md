@@ -3,21 +3,32 @@
 [![](https://img.shields.io/badge/Open_in_DevExpress_Support_Center-FF7200?style=flat-square&logo=DevExpress&logoColor=white)](https://supportcenter.devexpress.com/ticket/details/E20039)
 [![](https://img.shields.io/badge/📖_How_to_use_DevExpress_Examples-e9f6fc?style=flat-square)](https://docs.devexpress.com/GeneralInformation/403183)
 <!-- default badges end -->
-<!-- default file list -->
-*Files to look at*:
 
-* [HomeController.cs](./CS/DevExpressMvcApplication1/Controllers/HomeController.cs) (VB: [HomeController.vb](./VB/DevExpressMvcApplication1/Controllers/HomeController.vb))
-* [GridView.cshtml](./CS/DevExpressMvcApplication1/Views/Home/GridView.cshtml)
-* [Index.cshtml](./CS/DevExpressMvcApplication1/Views/Home/Index.cshtml)
-<!-- default file list end -->
-# GridView - How to Select a Particular Row when a Page is Opened First Time 
+# Grid View for ASP.NET MVC - How to select row when a page is opened for the first time 
 <!-- run online -->
 **[[Run Online]](https://codecentral.devexpress.com/e20039/)**
 <!-- run online end -->
 
+In this example, we use the `ViewBag` dictionary to transfer keys of selected rows from Controller to View.
 
-<p> This example demonstrates how to select a particular rows when a page is opened first time </p>
+```
+ViewData["selectedRows"] = new int[] { 1, 5, 9, 4, 11, 17, 34, 77 };
+```
 
-<br/>
+In the View, we call the [SelectRowByKey](https://docs.devexpress.com/AspNet/DevExpress.Web.Data.GridViewSelection.SelectRowByKey(System.Object)) method in the [PreRender](https://docs.devexpress.com/AspNetMvc/DevExpress.Web.Mvc.SettingsBase.PreRender) event to selecet the specified rows.
+			
+```
+settings.PreRender = (sender, e) => {
+    MVCxGridView gridView = sender as MVCxGridView;
+        if ((gridView != null) && (ViewData["selectedRows"] != null)) {
+            int[] selectedRows = (int[])ViewData["selectedRows"];
+            foreach (int key in selectedRows) {
+            gridView.Selection.SelectRowByKey(key);
+        }
+    }
+};
 
+## Files to Review
 
+* [HomeController.cs](./CS/DevExpressMvcApplication1/Controllers/HomeController.cs) (VB: [HomeController.vb](./VB/DevExpressMvcApplication1/Controllers/HomeController.vb))
+* [GridView.cshtml](./CS/DevExpressMvcApplication1/Views/Home/GridView.cshtml)
