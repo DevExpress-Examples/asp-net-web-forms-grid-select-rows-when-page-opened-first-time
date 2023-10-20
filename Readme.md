@@ -1,4 +1,5 @@
 <!-- default badges list -->
+![](https://img.shields.io/endpoint?url=https://codecentral.devexpress.com/api/v1/VersionRange/128550511/14.1.3%2B)
 [![](https://img.shields.io/badge/Open_in_DevExpress_Support_Center-FF7200?style=flat-square&logo=DevExpress&logoColor=white)](https://supportcenter.devexpress.com/ticket/details/E20039)
 [![](https://img.shields.io/badge/📖_How_to_use_DevExpress_Examples-e9f6fc?style=flat-square)](https://docs.devexpress.com/GeneralInformation/403183)
 <!-- default badges end -->
@@ -7,15 +8,20 @@
 <!-- run online -->
 **[[Run Online]](https://codecentral.devexpress.com/e20039/)**
 <!-- run online end -->
+This example demonstares how to specify a list of row to select in controller, pass this data to view, and select the specified rows.
 
-In this example, we use the `ViewBag` dictionary to transfer keys of selected rows from Controller to View.
+![](grid-with-selected-rows.png)
 
+We use the `ViewBag` dictionary to transfer keys of selected rows from Controller to View.
+
+**HomeController.cs**
 ```
 ViewData["selectedRows"] = new int[] { 1, 5, 9, 4, 11, 17, 34, 77 };
 ```
 
 In the View, we call the [SelectRowByKey](https://docs.devexpress.com/AspNet/DevExpress.Web.Data.GridViewSelection.SelectRowByKey(System.Object)) method in the [PreRender](https://docs.devexpress.com/AspNetMvc/DevExpress.Web.Mvc.SettingsBase.PreRender) event to selecet the specified rows.
-			
+
+**GridView.cshtml**
 ```
 settings.PreRender = (sender, e) => {
     MVCxGridView gridView = sender as MVCxGridView;
