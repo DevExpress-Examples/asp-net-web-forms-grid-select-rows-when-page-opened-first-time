@@ -7,7 +7,7 @@
 <!-- run online -->
 **[[Run Online]](https://codecentral.devexpress.com/e20039/)**
 <!-- run online end -->
-This example demonstares how to specify a list of rows in Controller, pass this data to View, and select the specified rows when a page is opened for the first time.
+This example demonstrates how to specify a list of rows in a Controller, pass this data to a View, and select the specified rows when a page is opened for the first time.
 
 ![](grid-with-selected-rows.png)
 
@@ -18,7 +18,7 @@ We use the `ViewBag` dictionary to transfer row keys from Controller to View.
 ViewData["selectedRows"] = new int[] { 1, 5, 9, 4, 11, 17, 34, 77 };
 ```
 
-In the View, we call the [SelectRowByKey](https://docs.devexpress.com/AspNet/DevExpress.Web.Data.GridViewSelection.SelectRowByKey(System.Object)) method in the [PreRender](https://docs.devexpress.com/AspNetMvc/DevExpress.Web.Mvc.SettingsBase.PreRender) event to selecet the specified rows.
+In the View, we call the [SelectRowByKey](https://docs.devexpress.com/AspNet/DevExpress.Web.Data.GridViewSelection.SelectRowByKey(System.Object)) method in the [PreRender](https://docs.devexpress.com/AspNetMvc/DevExpress.Web.Mvc.SettingsBase.PreRender) event to select the specified rows.
 
 **GridView.cshtml**
 ```
