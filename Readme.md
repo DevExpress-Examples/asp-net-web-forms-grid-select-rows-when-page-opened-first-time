@@ -6,7 +6,7 @@
 
 # Grid View for ASP.NET MVC - How to select row when a page is opened for the first time 
 <!-- run online -->
-**[[Run Online]](https://codecentral.devexpress.com/e20039/)**
+**[[Run Online]](https://codecentral.devexpress.com/128550511/)**
 <!-- run online end -->
 This example demonstrates how to specify a list of rows in a Controller, pass this data to a View, and select the specified rows when a page is opened for the first time.
 
