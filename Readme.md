@@ -14,14 +14,14 @@ This example demonstrates how to specify a list of rows in a Controller, pass th
 We use the `ViewBag` dictionary to transfer row keys from Controller to View.
 
 **HomeController.cs**
-```
+```cs
 ViewData["selectedRows"] = new int[] { 1, 5, 9, 4, 11, 17, 34, 77 };
 ```
 
 In the View, we call the [SelectRowByKey](https://docs.devexpress.com/AspNet/DevExpress.Web.Data.GridViewSelection.SelectRowByKey(System.Object)) method in the [PreRender](https://docs.devexpress.com/AspNetMvc/DevExpress.Web.Mvc.SettingsBase.PreRender) event to select the specified rows.
 
 **GridView.cshtml**
-```
+```cs
 settings.PreRender = (sender, e) => {
     MVCxGridView gridView = sender as MVCxGridView;
         if ((gridView != null) && (ViewData["selectedRows"] != null)) {
