@@ -1,11 +1,11 @@
-﻿Imports Microsoft.VisualBasic
-Imports System
+﻿Imports System
 Imports System.Collections
 Imports System.Linq
 Imports System.Web.UI
 
 Public MustInherit Class ItemsData
 	Implements IHierarchicalEnumerable, IEnumerable
+
 	Private data As IEnumerable
 
 	Public Sub New()
@@ -16,7 +16,7 @@ Public MustInherit Class ItemsData
 		Return Me.data.GetEnumerator()
 	End Function
 	Public Function GetHierarchyData(ByVal enumeratedItem As Object) As IHierarchyData Implements IHierarchicalEnumerable.GetHierarchyData
-		Return CType(enumeratedItem, IHierarchyData)
+		Return DirectCast(enumeratedItem, IHierarchyData)
 	End Function
 
 	Public MustOverride Function GetData() As IEnumerable
@@ -24,6 +24,7 @@ End Class
 
 Public Class ItemData
 	Implements IHierarchyData
+
 	Private privateText As String
 	Public Property Text() As String
 		Get
@@ -44,8 +45,8 @@ Public Class ItemData
 	End Property
 
 	Public Sub New(ByVal text As String, ByVal navigateUrl As String)
-		Text = text
-		NavigateUrl = navigateUrl
+		Me.Text = text
+		Me.NavigateUrl = navigateUrl
 	End Sub
 
 	' IHierarchyData
@@ -59,20 +60,20 @@ Public Class ItemData
 			Return Me
 		End Get
 	End Property
-	Private ReadOnly Property Path() As String Implements IHierarchyData.Path
+	Private ReadOnly Property IHierarchyData_Path() As String Implements IHierarchyData.Path
 		Get
 			Return NavigateUrl
 		End Get
 	End Property
-	Private ReadOnly Property Type() As String Implements IHierarchyData.Type
+	Private ReadOnly Property IHierarchyData_Type() As String Implements IHierarchyData.Type
 		Get
 			Return Me.GetType().ToString()
 		End Get
 	End Property
-	Private Function GetChildren() As IHierarchicalEnumerable Implements IHierarchyData.GetChildren
+	Private Function IHierarchyData_GetChildren() As IHierarchicalEnumerable Implements IHierarchyData.GetChildren
 		Return CreateChildren()
 	End Function
-	Private Function GetParent() As IHierarchyData Implements IHierarchyData.GetParent
+	Private Function IHierarchyData_GetParent() As IHierarchyData Implements IHierarchyData.GetParent
 		Return Nothing
 	End Function
 
@@ -87,15 +88,16 @@ End Class
 
 Public Class CategoriesData
 	Inherits ItemsData
+
 	Public Overrides Function GetData() As IEnumerable
-		Return _
-			From category In NorthwindDataProvider.DB.Categories _
+		Return From category In NorthwindDataProvider.DB.Categories
 			Select New CategoryData(category)
 	End Function
 End Class
 
 Public Class CategoryData
 	Inherits ItemData
+
 	Private privateCategory As Category
 	Public Property Category() As Category
 		Get
@@ -108,10 +110,10 @@ Public Class CategoryData
 
 	Public Sub New(ByVal category As Category)
 		MyBase.New(category.CategoryName, "?CategoryID=" & category.CategoryID)
-		Category = category
+		Me.Category = category
 	End Sub
 
-	Protected Overrides Overloads Function HasChildren() As Boolean
+	Protected Overrides Function HasChildren() As Boolean
 		Return True
 	End Function
 	Protected Overrides Function CreateChildren() As IHierarchicalEnumerable
@@ -121,6 +123,7 @@ End Class
 
 Public Class ProductsData
 	Inherits ItemsData
+
 	Private privateCategoryID As Integer
 	Public Property CategoryID() As Integer
 		Get
@@ -133,19 +136,19 @@ Public Class ProductsData
 
 	Public Sub New(ByVal categoryID As Integer)
 		MyBase.New()
-		CategoryID = categoryID
+		Me.CategoryID = categoryID
 	End Sub
 
 	Public Overrides Function GetData() As IEnumerable
-		Return _
-			From product In NorthwindDataProvider.DB.Products _
-			Where product.CategoryID.Equals(CategoryID) _
+		Return From product In NorthwindDataProvider.DB.Products
+			Where product.CategoryID = CategoryID
 			Select New ProductData(product)
 	End Function
 End Class
 
 Public Class ProductData
 	Inherits ItemData
+
 	Public Sub New(ByVal product As Product)
 		MyBase.New(product.ProductName, "?CategoryID=" & product.CategoryID & "&ProductID=" & product.ProductID)
 	End Sub
